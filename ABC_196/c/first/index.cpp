@@ -1,33 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define debug(arg) std::cerr << #arg << ": " << (arg) << '\n'
+#define INF ((1LL << 62) - (1LL << 31))
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define all(x) (x).begin(), (x).end()
+using ll = long long;
+using P = pair<int, int>;
+using Graph = vector<vector<int>>;
 
-int main () {
-    long long n; cin >> n;
-    int size = to_string(n).size();
-    long long ans = 0;
-    if (size % 2 == 1) {
-        long long v = 1;
-        size--;
-        for (int i = 0; i < size; i++) v *= 10;
-        n = v-1;
-    } else {
-        long long a = stoll(to_string(n).substr(0, size / 2));
-        long long b = stoll(to_string(n).substr(size /2, size /2));
-        if (a <= b) {
-            long long v = 1;
-            for (int i = 0; i < size / 2 - 1; i++) v *= 10;
-            ans += (min(a, b) - v) + 1;
-        }
-        size -= 2;
-    }
+int main() { 
+  ll n; cin >> n;
+  ll ans = 0;
+  for (int i = 1; i <= 1001000; i++) {
+    string str = to_string(i) + to_string(i);
 
-    for (int i = size; i > 0; i -= 2) {
-        string s = "";
-        for (int j = 0; j < i / 2; j++) s += "9"; 
-        long long v = 1;
-        for (int j = 0; j < i / 2 - 1; j++) v *= 10;
-        ans += stoi(s) - v + 1;
-    }
-    cout << ans << endl;
-    return 0;
+    if (stoll(str) > n) break;
+    ans++;
+  }
+  cout << ans << endl;
+  return 0; 
 }
